@@ -7,18 +7,25 @@ import UIKit
 
 enum MenuRoute: CaseIterable {
     case camera
+    case contacts
+    case map
 
     var title: String {
         switch self {
-        case .camera:
-            return "TO CAMERA FEATURE"
+        case .camera: "TO CAMERA FEATURE"
+        case .contacts: "TO CONTACTS FEATURE"
+        case .map: "TO MAP FEATURE"
         }
     }
 
     var viewController: UIViewController {
         switch self {
         case .camera:
-            return CameraViewController()
+            CameraViewController()
+        case .contacts:
+            ContactsViewController()
+        case .map:
+            MapViewController()
         }
     }
 }

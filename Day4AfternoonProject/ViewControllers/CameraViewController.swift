@@ -60,24 +60,68 @@ final class CameraViewController: UIViewController {
         ])
     }
 
-    // TODO: Mettre à jour la UI de la vue en fonction du statut d'autorisation de AVCaptureDevice
     private func refreshPermissionStatus() {
+        let status = AVCaptureDevice.authorizationStatus(for: .video)
 
+        let statusText = switch status {
+        case .authorized: "Statut : autorisé"
+        case .notDetermined: "Statut : non déterminé"
+        case .denied: "Statut : refusé"
+        case .restricted: "Statut : restreint"
+        @unknown default: "Statut : inconnu"
+        }
+        
+        statusLabel.text = statusText
+        openCameraButton.isEnabled = switch status {
+        case .authorized: true
+        default: false
+        }
     }
 
-    // TODO:
-    // - Lire le statut d'autorisation de AVCaptureDevice et demander l'accès si besoin
-    // - Rafraîchir la UI, et si statut refusé afficher une alerte
-    @objc
-    private func didTapRequestPermission() {
+    @objc private func didTapRequestPermission() {
+        let status = AVCaptureDevice.authorizationStatus(for: .video)
 
+        switch status {
+        case .authorized:
+            refreshPermissionStatus()
+
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
+                DispatchQueue.main.async {
+                    guard let self else { return }
+                    self.refreshPermissionStatus()
+
+                    if !granted {
+                        self.presentPermissionDeniedAlert()
+                    }
+                }
+            }
+
+        case .denied, .restricted:
+            presentPermissionDeniedAlert()
+
+        @unknown default:
+            presentPermissionDeniedAlert()
+        }
     }
 
-    // TODO:
-    // - Vérifier que la permission est autorisée et ouvrir un UIImagePickerController avec sourceType = .camera
-    @objc
-    private func didTapOpenCamera() {
+    @objc private func didTapOpenCamera() {
+        guard AVCaptureDevice.authorizationStatus(for: .video) == .authorized else {
+            presentPermissionDeniedAlert()
+            return
+        }
 
+        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
+            presentCameraUnavailableAlert()
+            return
+        }
+
+        let picker = UIImagePickerController()
+        picker.sourceType = .camera
+        picker.delegate = self
+        picker.allowsEditing = false
+
+        present(picker, animated: true)
     }
 
     private func presentPermissionDeniedAlert() {
@@ -109,5 +153,21 @@ final class CameraViewController: UIViewController {
 
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
+    }
+}
+
+extension CameraViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
+    }
+
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
+    ) {
+        let image = info[.originalImage] as? UIImage
+        imageView.image = image
+        picker.dismiss(animated: true)
     }
 }
