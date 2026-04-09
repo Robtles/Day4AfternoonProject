@@ -149,9 +149,11 @@
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Day4AfternoonProject/Base/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Cette app a besoin de la caméra pour prendre des photos";
+				INFOPLIST_KEY_NSContactsUsageDescription = "Cette app a besoin d’accéder à vos contacts pour les afficher dans une liste.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Cette app a besoin de votre position pour afficher votre localisation sur la carte.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -183,9 +185,11 @@
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Day4AfternoonProject/Base/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Cette app a besoin de la caméra pour prendre des photos";
+				INFOPLIST_KEY_NSContactsUsageDescription = "Cette app a besoin d’accéder à vos contacts pour les afficher dans une liste.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Cette app a besoin de votre position pour afficher votre localisation sur la carte.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
