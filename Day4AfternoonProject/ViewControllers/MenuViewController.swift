@@ -35,6 +35,7 @@ final class MenuViewController: UIViewController {
     private func button(for route: MenuRoute) -> UIButton {
         let button = UIButton(type: .system)
         button.setTitle(route.title, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 18.0)
 
         button.addAction(
             UIAction { [weak self] _ in
